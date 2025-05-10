@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Application Form</title>
+</head>
+<body>
+    <form method="POST" action="/submit">
+        <fieldset>
+            <legend>Applicant's Personal Information</legend>
+            <label for="fname">First Name*</label>
+            <input id="fname" name="fname" type="text" maxlength="20" required>
+
+            <label for="mname">Middle Name</label>
+            <input id="mname" name="mname" type="text">
+
+            <label for="lname">Last Name*</label>
+            <input id="lname" name="lname" type="text" required><br><br>
+
+            <label for="dob">Date of Birth*</label>
+            <input id="dob" name="dob" type="date" required>
+
+            <label for="age">Age*</label>
+            <input id="age" name="age" type="number" required>
+
+            <label for="gender">Gender*</label>
+            <select id="gender" name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+                <option>Prefer not to say</option>
+            </select><br><br>
+
+            <label for="nationality">Nationality*</label>
+            <input id="nationality" name="nationality" type="text" required>
+
+            <label for="mail">Email*</label>
+            <input id="mail" name="mail" type="email" maxlength="60" required>
+
+            <label for="ph">Phone Number*</label>
+            <input id="ph" name="ph" type="tel" maxlength="11" pattern="[0-9]{5}[0-9]{5}" placeholder="12345-67890" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Address</legend>
+            <label for="address">Street Address*</label>
+            <input id="address" name="address" type="text" required>
+
+            <label for="city">City*</label>
+            <input id="city" name="city" type="text" required>
+
+            <label for="state">State*</label>
+            <input id="state" name="state" type="text" required>
+
+            <label for="zip">Zip Code*</label>
+            <input id="zip" name="zip" type="text" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Qualifications</legend>
+            <label for="X_Marks">X Percentage*</label>
+            <input id="X_Marks" name="X_Marks" type="number" min="0" max="100" required>
+
+            <label for="XII_Marks">XII Percentage*</label>
+            <input id="XII_Marks" name="XII_Marks" type="number" min="0" max="100" required>
+
+            <label for="Deg_percent">Degree Percentage*</label>
+            <input id="Deg_percent" name="Deg_percent" type="number" min="0" max="100" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Job Preferences</legend>
+            <label for="position">Position Applying For*</label>
+            <input id="position" name="position" type="text" required>
+
+            <label for="experience">Years of Experience*</label>
+            <input id="experience" name="experience" type="number" min="0" required>
+
+            <label for="linkedin">LinkedIn Profile</label>
+            <input id="linkedin" name="linkedin" type="url">
+        </fieldset>
+
+        <fieldset>
+            <legend>Skills</legend>
+            <div id="skills-wrapper">
+                <label>Skill 1:</label>
+                <input type="text" name="skills[]" required>
+            </div>
+            <button type="button" onclick="addSkill()">+</button>
+            <button type="button" onclick="removeSkill()">-</button>
+        </fieldset>
+        
+
+        <fieldset>
+            <legend>Cover Letter</legend>
+            <label for="cover">Write a short cover letter*</label><br>
+            <textarea id="cover" name="cover" rows="5" cols="60" required></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Resume</legend>
+            <label for="resume">Upload Resume</label>
+            <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx">
+        </fieldset>
+
+        <button type="submit">Submit Application</button>
+    </form>
+
+    <script>
+        let skillCount = 1;
+    
+        function addSkill() {
+            skillCount++;
+            const wrapper = document.getElementById('skills-wrapper');
+            const newField = document.createElement('div');
+            newField.innerHTML = `<label>Skill ${skillCount}:</label>
+                                  <input type="text" name="skills[]" required>`;
+            wrapper.appendChild(newField);
+        }
+    
+        function removeSkill() {
+            const wrapper = document.getElementById('skills-wrapper');
+            if (wrapper.children.length > 2) {
+                wrapper.removeChild(wrapper.lastElementChild);
+                skillCount--;
+            }
+        }
+
+
+        document.querySelector("form").addEventListener("submit", function (e) {
+            const fname = document.forms[0]["fname"].value.trim();
+            const email = document.forms[0]["mail"].value.trim();
+            const age = document.forms[0]["age"].value.trim();
+            const xMarks = document.forms[0]["X_Marks"].value;
+            const xiiMarks = document.forms[0]["XII_Marks"].value;
+            const degPercent = document.forms[0]["Deg_percent"].value;
+
+            const nameRegex = /^[A-Za-z\s]+$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+
+            if (!fname || !nameRegex.test(fname)) {
+            alert("Please enter a valid first name (letters only).");
+            e.preventDefault();
+            return;
+            }
+
+            if (!email || !emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            e.preventDefault();
+            return;
+            }
+
+            if (isNaN(age) || age < 18 || age > 65) {
+            alert("Please enter a valid age between 18 and 65.");
+            e.preventDefault();
+            return;
+            }
+
+            if (xMarks < 0 || xMarks > 100 || xiiMarks < 0 || xiiMarks > 100 || degPercent < 0 || degPercent > 100) {
+            alert("Please enter valid marks (0-100%) for education.");
+            e.preventDefault();
+            return;
+            }
+        });
+    </script>
+    
+</body>
+</html>
