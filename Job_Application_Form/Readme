@@ -1,1 +1,67 @@
 
+## 📝 Project Title: Job Application Form with Node.js and MySQL
+
+### 📌 Project Description:
+
+This project is a **web-based job application form** built using **HTML, JavaScript, Node.js, and MySQL**. It allows users to fill out and submit job applications, 
+which are then stored securely in a MySQL database. The form collects comprehensive applicant information, performs client-side validation, and persists data to 
+the backend for future reference and processing.
+
+---
+
+### 🔧 Key Features:
+
+* **Front-End:**
+
+  * Responsive job application form using plain HTML.
+  * Fields include personal details, education, job preferences, skills, and cover letter.
+  * Client-side validation using JavaScript:
+
+    * Validates names, email, phone number, age, and percentage marks.
+    * Dynamic skill input section with Add/Remove buttons.
+
+* **Back-End:**
+
+  * Built with native **Node.js `http` module** .
+  * Handles:
+
+    * Serving the HTML form.
+    * Receiving and parsing form submissions (`POST /submit`).
+    * Storing submitted data into a MySQL database.
+
+* **Database:**
+
+  * Uses **MySQL** to store application records.
+  * Fields include all user inputs like name, DOB, education details, job preferences, skills, etc.
+
+---
+
+### 🗃 Technologies Used:
+
+* **Frontend:** HTML5, JavaScript
+* **Backend:** Node.js (`http`, `fs`, `path` modules)
+* **Database:** MySQL (connected via `mysql2` package)
+* **Other Tools:** NPM, MySQL Workbench / phpMyAdmin for database management
+
+---
+
+### 📂 Project Structure:
+
+```
+Job_Application_Form/
+│
+├── form.html        → The job application form UI
+├── script.js        → Client-side form validation
+├── server.js        → Node.js server to handle form submission and DB insertion
+├── config.js        → MySQL database configuration
+├── package.json     → Node.js project dependencies
+```
+
+---
+
+### 📈 Future Improvements:
+
+* Add file upload (resume, photo).
+* Migrate to **Express.js** for cleaner routing.
+* Add email confirmation after form submission.
+
