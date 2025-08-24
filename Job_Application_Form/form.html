@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Application Form</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <form method="POST" action="/submit">
+        <fieldset>
+            <legend>Personal Info</legend>
+            <label>First Name*</label>
+            <input name="fname" required>
+            <label>Middle Name</label>
+            <input name="mname">
+            <label>Last Name*</label>
+            <input name="lname" required><br><br>
+
+            <label>DOB*</label>
+            <input type="date" name="dob" required>
+            <label>Age*</label>
+            <input type="number" name="age" required>
+            <label>Gender*</label>
+            <select name="gender" required>
+                <option>Male</option>
+                <option>Female</option>
+                <option>Others</option>
+                <option>Prefer not to say</option>
+            </select>
+            <label>Nationality*</label>
+            <input name="nationality" required>
+            <label>Email*</label>
+            <input type="email" name="mail" required>
+            <label>Phone*</label>
+            <input name="ph" pattern="\d{10}" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Address</legend>
+            <input name="address" placeholder="Street Address" required>
+            <input name="city" placeholder="City" required>
+            <input name="state" placeholder="State" required>
+            <input name="zip" placeholder="ZIP" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Education</legend>
+            <input type="number" name="X_Marks" placeholder="X %" step="any" required>
+            <input type="number" name="XII_Marks" placeholder="XII %" step="any" required>
+            <input type="number" name="Deg_percent" placeholder="Degree %" step="any" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Job Preferences</legend>
+            <input name="position" placeholder="Position Applying For" required>
+            <input type="number" name="experience" placeholder="Years of Experience" required>
+            <input type="url" name="linkedin" placeholder="LinkedIn Profile">
+        </fieldset>
+
+        <fieldset>
+            <legend>Skills and Projects</legend>
+            <div id="skills-wrapper">
+                <label>Skill 1:</label>
+                <input type="text" name="skills[]" required>
+            </div>
+            <button type="button" onclick="addSkill()">Add</button>
+            <button type="button" onclick="removeSkill()">Remove</button>
+        </fieldset>
+
+
+        <fieldset>
+            <legend>Cover Letter</legend>
+            <textarea name="cover" rows="5" required></textarea>
+        </fieldset>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        let skillCount = 1;
+
+        function addSkill() {
+            skillCount++;
+            const wrapper = document.getElementById('skills-wrapper');
+            const newField = document.createElement('div');
+            newField.innerHTML = `<label>Skill ${skillCount}:</label>
+                                <input type="text" name="skills[]" required>`;
+            wrapper.appendChild(newField);
+        }
+
+        function removeSkill() {
+            const wrapper = document.getElementById('skills-wrapper');
+            if (wrapper.children.length > 1) {
+                wrapper.removeChild(wrapper.lastElementChild);
+                skillCount--;
+            }
+        }
+    </script>
+
+</body>
+</html>

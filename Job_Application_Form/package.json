@@ -1,0 +1,12 @@
+{
+  "name": "job-application-form",
+  "version": "1.0.0",
+  "description": "Simple job application form with Node.js and MySQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "mysql2": "^3.9.4"
+  }
+}
